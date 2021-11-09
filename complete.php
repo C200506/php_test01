@@ -1,34 +1,23 @@
 <?php
   session_start();
+  require_once("functions.php");
 
   $name = $_SESSION['name'];
   $hobby = $_SESSION['email'];
   $gender = $_SESSION['gender'];
 
   $dbh = db_conn();
-
   try{ 
-
-  $sql = "INSERT INTO user (email, name, gender) VALUE (:email, :name, :gender)"; 
-
-  $stmt = $dbh->prepare($sql); 
-
-  $stmt->bindValue(':email', $hobby, PDO::PARAM_STR); 
-
-  $stmt->bindValue(':name', $name, PDO::PARAM_STR); 
-
-  $stmt->bindValue(':gender', $gender, PDO::PARAM_INT); 
-
-  $stmt->execute(); 
-
-  unset($dbh) 
-
- }catch (PDOException $e){ 
-
-      echo($e->getMessage()); 
-
-      die(); 
-
+	$sql = "INSERT INTO user (email, name, gender) VALUE (:email, :name, :gender)"; 
+	$stmt = $dbh->prepare($sql); 
+	$stmt->bindValue(':email', $hobby, PDO::PARAM_STR); 
+	$stmt->bindValue(':name', $name, PDO::PARAM_STR); 
+	$stmt->bindValue(':gender', $gender, PDO::PARAM_INT); 
+	$stmt->execute(); 
+  	unset($dbh) 
+   }catch (PDOException $e){ 
+        echo($e->getMessage()); 
+        die(); 
   } 
 ?>
 
